@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    include: secret
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: 'true'
+
+  logging.level:
+    org.hibernate.SQL: debug
