@@ -33,10 +33,12 @@ jobs:
       shell: bash
 
     ## create YML
-    - name : Create Application YML File
+    - name : Create application.yml File
       run : |
-        echo "${{secrets.APPLICATION_YML}}" | base64 --decode > src/main/resources/application.yml
-        find src
+        cd ./src/main/resources
+        touch ./application.yml
+        echo "${{secrets.APPLICATION_YML}}" > ./application.yml
+        shell: bash
 
     ## gradle build
     - name: Build with Gradle
