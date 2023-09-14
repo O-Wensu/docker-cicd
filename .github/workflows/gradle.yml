@@ -39,8 +39,8 @@ jobs:
     - name: Docker build & push to prod
       run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f ./Dockerfile -t ${{ secrets.DOCKER_REPO }}/latest .
-          docker push ${{ secrets.DOCKER_REPO }}/latest
+          docker build -f ./Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/sample .
+          docker push ${{ secrets.DOCKER_USERNAME }}/sample
       
     ## Deploy 
     - name: Deploy to EC2
@@ -51,5 +51,5 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
               sudo docker rm -f $(sudo docker ps -qa) # Remove all running containers
-              sudo docker pull ${{ secrets.DOCKER_REPO }}:latest 
-              sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPO }}:latest
+              sudo docker pull ${{ secrets.DOCKER_USERNAME }}/sample
+              sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/sample
