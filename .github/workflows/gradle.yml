@@ -10,6 +10,10 @@ name: CI/CD
 on:
   push:
     branches: [ "main" ]
+    
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   CICD:
@@ -41,7 +45,7 @@ jobs:
     ## Build and Push to Docker Hub
     - name: Docker build & push to Hub
       run: |
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p $DOCKER_PASSWORD
         docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/sample .
         docker push ${{ secrets.DOCKER_USERNAME }}/sample
       
