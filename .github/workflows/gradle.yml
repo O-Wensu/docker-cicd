@@ -53,10 +53,10 @@ jobs:
     ## Build and Push
     - uses: actions/checkout@v3
     - name: Build the Docker image  
-      run: docker build . --file Dockerfile --tag ${{ DOCKER_USERNAME }}/${{ DOCKER_REPO }}:latest
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:latest
 
     - name: Push the Docker image
-      run: docker push ${{ DOCKER_USERNAME }}/${{ DOCKER_REPO }}:latest
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:latest
       
     ## Deploy 
     - name: Deploy to EC2
