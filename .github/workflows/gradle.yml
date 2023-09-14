@@ -54,9 +54,9 @@ jobs:
     ## image Build and Push
     - name: Docker build & push to prod
       run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/latest .
-          docker push ${{ secrets.DOCKER_REPO }}/latest
+        docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+        docker build -f Dockerfile -t "${{ secrets.DOCKER_REPO }}:latest" .
+        docker push "${{ secrets.DOCKER_REPO }}:latest"
         
     ## Deploy 
     - name: Deploy to EC2
